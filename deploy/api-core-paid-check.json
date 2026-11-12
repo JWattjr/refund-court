@@ -1,0 +1,69 @@
+{
+  "request": "{\"buyer\":\"0xcf4012fb61db40f392bcc85aa563f90922910874\",\"city\":\"Lagos\",\"endpoint\":\"https://refund-court.vercel.app/api/weather/honest\",\"delivered_at\":1794518203,\"nonce\":\"2220ac97-542d-426a-be6a-e18d4c738266\"}",
+  "response": "{\"city\":\"Lagos\",\"temperature\":30,\"unit\":\"C\",\"observed_at\":1794517903,\"source\":\"Synthetic weather for testnet demonstration\"}",
+  "payment_hash": "0x9743091e337ced9c92e26cae1a61d756caa1689bcf30e725b84031ae3ab65a4e",
+  "signature": "0xef696a0dc5df521c7272ab9efb2b98ff18c60b57964f825b7f36f0c02ee5417700dd3f1b19f6554dbd8ef1f7891caa41360e6681d16a6c6e2ca794dd9a5736401b",
+  "evidence_sha256": "7dfc4f4b7d9bcab5ac2a6f609268e2b646b82a8e8b750afeedffd4eabcd0eb79",
+  "receipt": {
+    "type": "0x2",
+    "status": "0x1",
+    "cumulativeGasUsed": "0xd7d2d",
+    "logs": [
+      {
+        "address": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+        "topics": [
+          "0x98de503528ee59b575ef0c0a2576a82497bfc029a5685b209e9ec333479b10a5",
+          "0x000000000000000000000000cf4012fb61db40f392bcc85aa563f90922910874",
+          "0x52e41a3468816be7fb32362dcf40cd529f815e08e0861659a184fa9379a139c2"
+        ],
+        "data": "0x",
+        "blockHash": "0xf24804ce8657b5131aa1c1b4ab3d2fb0162c026621e770f849646a183abfa8dc",
+        "blockNumber": "0x374baeb",
+        "blockTimestamp": "0x6af62cbb",
+        "transactionHash": "0x9743091e337ced9c92e26cae1a61d756caa1689bcf30e725b84031ae3ab65a4e",
+        "transactionIndex": "0x3",
+        "logIndex": "0x2",
+        "removed": false,
+        "blockTimestampMs": "0x1a1d19ebd98"
+      },
+      {
+        "address": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x000000000000000000000000cf4012fb61db40f392bcc85aa563f90922910874",
+          "0x0000000000000000000000000fbe2c500d7fb63451cbe7bade9348e19a6cb91f"
+        ],
+        "data": "0x00000000000000000000000000000000000000000000000000000000000003e8",
+        "blockHash": "0xf24804ce8657b5131aa1c1b4ab3d2fb0162c026621e770f849646a183abfa8dc",
+        "blockNumber": "0x374baeb",
+        "blockTimestamp": "0x6af62cbb",
+        "transactionHash": "0x9743091e337ced9c92e26cae1a61d756caa1689bcf30e725b84031ae3ab65a4e",
+        "transactionIndex": "0x3",
+        "logIndex": "0x3",
+        "removed": false,
+        "blockTimestampMs": "0x1a1d19ebd98"
+      }
+    ],
+    "logsBloom": "0x00200000040000000000000000100000000000000000000000020000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000008010000000000000000000000000000000000004800000000000000000000000000000000000000000000000000000010000000000000000000000000400000000000000000000000000000004000000000000000000000000000000000000000000000000004000000000000000000000000000000000002000000000000000000000000000000000100000000000000000400000004000000000000000000000020000000000000000000000000000000000000",
+    "transactionHash": "0x9743091e337ced9c92e26cae1a61d756caa1689bcf30e725b84031ae3ab65a4e",
+    "transactionIndex": "0x3",
+    "blockHash": "0xf24804ce8657b5131aa1c1b4ab3d2fb0162c026621e770f849646a183abfa8dc",
+    "blockNumber": "0x374baeb",
+    "gasUsed": "0x14eec",
+    "effectiveGasPrice": "0x5b8d80",
+    "blobGasUsed": "0x168a2",
+    "from": "0xd407e409e34e0b9afb99ecceb609bdbcd5e7f1bf",
+    "to": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+    "contractAddress": null,
+    "l1GasPrice": "0x10",
+    "l1GasUsed": "0xcf8",
+    "l1Fee": "0xc3",
+    "l1BaseFeeScalar": "0x44d",
+    "l1BlobBaseFee": "0x1",
+    "l1BlobBaseFeeScalar": "0xa118b",
+    "daFootprintGasScalar": "0x1be"
+  },
+  "paidMicroUSDC": 1000,
+  "capturedAt": "2026-11-12T21:16:42.714Z",
+  "purpose": "Live validation after removing the unused default paywall UI dependencies; no additional GenLayer claim or deposit."
+}

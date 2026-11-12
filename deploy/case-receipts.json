@@ -1,0 +1,252 @@
+{
+  "verifiedAt": "2026-11-12T20:47:43.820325+00:00",
+  "network": "StudioNet",
+  "chainId": 61999,
+  "depositTotalWei": 63,
+  "x402TotalUSDC": "0.004",
+  "cases": {
+    "subjectivePromiseRejected": {
+      "status": "REJECTED",
+      "compile": {
+        "label": "compile-subjective",
+        "hash": "0x1e4dfae43e90c7aa12099b958a35d0ba4e5db9b7089d98fd1333b37e655f4991",
+        "url": "https://explorer-studio.genlayer.com/tx/0x1e4dfae43e90c7aa12099b958a35d0ba4e5db9b7089d98fd1333b37e655f4991"
+      },
+      "finalizedRecord": {
+        "label": "compile-subjective-child-0",
+        "hash": "0xffdaeb529f33644c2d64d215b849292cb90bd7ec138d1a81ff8d3bf9a0105e02",
+        "url": "https://explorer-studio.genlayer.com/tx/0xffdaeb529f33644c2d64d215b849292cb90bd7ec138d1a81ff8d3bf9a0105e02"
+      }
+    },
+    "promiseFrozenAndBonded": {
+      "status": "ACTIVE",
+      "services": [
+        {
+          "id": "service-2",
+          "hash": "a9c6f6828db960ab108c39a79698767c5f25fd9673758330f505de47b372cf17",
+          "bondWei": 20,
+          "compile": {
+            "label": "compile-honest",
+            "hash": "0xcdbc4ead416becf6449d7f03b6612795f51a87fd924040eec2190e084c95daf3",
+            "url": "https://explorer-studio.genlayer.com/tx/0xcdbc4ead416becf6449d7f03b6612795f51a87fd924040eec2190e084c95daf3"
+          },
+          "bond": {
+            "label": "bond-service-2",
+            "hash": "0x63f7b1c0320a271056746699a74c11dd313bf434c2c41592aa0223befd4073b3",
+            "url": "https://explorer-studio.genlayer.com/tx/0x63f7b1c0320a271056746699a74c11dd313bf434c2c41592aa0223befd4073b3"
+          },
+          "activation": {
+            "label": "bond-service-2-child-0",
+            "hash": "0xf205244a2aaf76bb0ddd164d0953f2e95c43c243bb947c8570e15776ea6ed39c",
+            "url": "https://explorer-studio.genlayer.com/tx/0xf205244a2aaf76bb0ddd164d0953f2e95c43c243bb947c8570e15776ea6ed39c"
+          }
+        },
+        {
+          "id": "service-3",
+          "hash": "407cd07850abeab3d75e2d51f09ba463abb2422ef93de871e84ad8c2590d3d26",
+          "bondWei": 20,
+          "compile": {
+            "label": "compile-broken",
+            "hash": "0xb5373ab368e8b1a9544136a82cee1ff7b7fbd451f7fb24999ab726d6cc0a1d24",
+            "url": "https://explorer-studio.genlayer.com/tx/0xb5373ab368e8b1a9544136a82cee1ff7b7fbd451f7fb24999ab726d6cc0a1d24"
+          },
+          "bond": {
+            "label": "bond-service-3",
+            "hash": "0x3f4ef6324c729fcb209831432db427b4f318238e8fba1bfb075d94f5b6567cf5",
+            "url": "https://explorer-studio.genlayer.com/tx/0x3f4ef6324c729fcb209831432db427b4f318238e8fba1bfb075d94f5b6567cf5"
+          },
+          "activation": {
+            "label": "bond-service-3-child-0",
+            "hash": "0x06352bf9731d8fa4f3957c4187fd8c1b4303f967e7fa8f7fe4bfe0ca1100996c",
+            "url": "https://explorer-studio.genlayer.com/tx/0x06352bf9731d8fa4f3957c4187fd8c1b4303f967e7fa8f7fe4bfe0ca1100996c"
+          }
+        },
+        {
+          "id": "service-4",
+          "hash": "881157a93c8ee8d6aaa8990212cc8ac6233b47d3147c5de54cb942cc130ad394",
+          "bondWei": 20,
+          "compile": {
+            "label": "compile-injection",
+            "hash": "0x0bf2f999214e6a6c169663ab9d9df48984cdb17c8c535e6294a900f44db5d380",
+            "url": "https://explorer-studio.genlayer.com/tx/0x0bf2f999214e6a6c169663ab9d9df48984cdb17c8c535e6294a900f44db5d380"
+          },
+          "bond": {
+            "label": "bond-service-4",
+            "hash": "0x9d677094d0ecb84ba260bd04d67b8a92aefad9d8982768f68b141aefb33f57c0",
+            "url": "https://explorer-studio.genlayer.com/tx/0x9d677094d0ecb84ba260bd04d67b8a92aefad9d8982768f68b141aefb33f57c0"
+          },
+          "activation": {
+            "label": "bond-service-4-child-0",
+            "hash": "0x49581861dab00e7fdda765bc27881e1ff094ebfb34508aca02c1982b8a329613",
+            "url": "https://explorer-studio.genlayer.com/tx/0x49581861dab00e7fdda765bc27881e1ff094ebfb34508aca02c1982b8a329613"
+          }
+        }
+      ]
+    },
+    "brokenResponseRefund": {
+      "id": "case-1",
+      "outcome": "REFUND",
+      "verdicts": [
+        {
+          "criterion": "Response states it is a demo weather report.",
+          "quote": "Synthetic weather for testnet demonstration",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "Response identifies the requested city.",
+          "quote": "\"city\":\"Lagos\"",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "Response provides temperature in Celsius.",
+          "quote": "\"temperature\":86,\"unit\":\"F\"",
+          "verdict": "NOT_MET"
+        },
+        {
+          "criterion": "The signed JSON includes observed_at, and observed_at is no more than 3600 seconds before delivered_at.",
+          "quote": "\"observed_at\":1794503105",
+          "verdict": "NOT_MET"
+        }
+      ],
+      "payment": {
+        "hash": "0x8808787a7b24adf5ebd032ebd43b94770a4a96752e4c0d0921b70f0637362722",
+        "url": "https://sepolia.basescan.org/tx/0x8808787a7b24adf5ebd032ebd43b94770a4a96752e4c0d0921b70f0637362722"
+      },
+      "judgment": {
+        "label": "judge-broken",
+        "hash": "0xe29d8edad05ac3b63670c3ed741444618f9ad4c9f5354c7ce29a27db1607fac3",
+        "url": "https://explorer-studio.genlayer.com/tx/0xe29d8edad05ac3b63670c3ed741444618f9ad4c9f5354c7ce29a27db1607fac3"
+      },
+      "finalizedSettlement": {
+        "label": "judge-broken-child-0",
+        "hash": "0x6de0fe35cd7da489aa47be2005e87f7eab8daede02097be8c1c02564c8df9743",
+        "url": "https://explorer-studio.genlayer.com/tx/0x6de0fe35cd7da489aa47be2005e87f7eab8daede02097be8c1c02564c8df9743"
+      },
+      "nativePayout": {
+        "amountWei": "12",
+        "hash": "0x7b19789a29bea6c97823a9df9afd0d33808278b4d5b4535d74dcab5715e5ed14",
+        "url": "https://explorer-studio.genlayer.com/tx/0x7b19789a29bea6c97823a9df9afd0d33808278b4d5b4535d74dcab5715e5ed14",
+        "verification": {
+          "label": "verify-pull-1-1",
+          "hash": "0xd63a279660d0f3a89181c8163a8e246f46867d1f99831982a4009f83410134a9",
+          "url": "https://explorer-studio.genlayer.com/tx/0xd63a279660d0f3a89181c8163a8e246f46867d1f99831982a4009f83410134a9"
+        },
+        "note": "One aggregate 12 wei transfer: 5 wei reimbursement plus 1 wei returned fee for each of the broken and injection cases."
+      }
+    },
+    "honestResponseSellerFee": {
+      "id": "case-2",
+      "outcome": "DELIVERED",
+      "verdicts": [
+        {
+          "criterion": "The response is explicitly labeled or identified as a demo or synthetic weather report.",
+          "quote": "Synthetic weather for testnet demonstration",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "The response contains a temperature value expressed in Celsius.",
+          "quote": "\"temperature\":30,\"unit\":\"C\"",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "The response includes an observed_at timestamp that is no more than 3600 seconds before the server-signed delivered_at timestamp.",
+          "quote": "\"observed_at\":1794510050",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "The response contains a weather report for the city specified in the signed request.",
+          "quote": "{\"city\":\"Lagos\",\"temperature\":30,\"unit\":\"C\",\"observed_at\":1794510050,\"source\":\"Synthetic weather for testnet demonstration\"}",
+          "verdict": "MET"
+        }
+      ],
+      "payment": {
+        "hash": "0xeefcb15643de1529d3c1ada27c38d2cf60641b5cf4b63e51cb129c086e3af397",
+        "url": "https://sepolia.basescan.org/tx/0xeefcb15643de1529d3c1ada27c38d2cf60641b5cf4b63e51cb129c086e3af397"
+      },
+      "judgment": {
+        "label": "judge-honest",
+        "hash": "0xdb710293b992e2b6bc2946c91c6fdd67a4b8d7ff97c192f4bb5600c871eb9182",
+        "url": "https://explorer-studio.genlayer.com/tx/0xdb710293b992e2b6bc2946c91c6fdd67a4b8d7ff97c192f4bb5600c871eb9182"
+      },
+      "finalizedSettlement": {
+        "label": "judge-honest-child-0",
+        "hash": "0xbbf0b6c0ac57bada3334b4532498016f53ff772906d26224760f37d2786800d0",
+        "url": "https://explorer-studio.genlayer.com/tx/0xbbf0b6c0ac57bada3334b4532498016f53ff772906d26224760f37d2786800d0"
+      },
+      "nativePayout": {
+        "amountWei": "1",
+        "hash": "0xd7a02d99600ad7d20eb2b8c3fe8b198c001353b9ed323bfb9353420cecf6bf0b",
+        "url": "https://explorer-studio.genlayer.com/tx/0xd7a02d99600ad7d20eb2b8c3fe8b198c001353b9ed323bfb9353420cecf6bf0b",
+        "verification": {
+          "label": "verify-pull-0-1",
+          "hash": "0x8261d1e06c53f7171f098539c8d025b65b79e2da15db398c8fa976c933497c44",
+          "url": "https://explorer-studio.genlayer.com/tx/0x8261d1e06c53f7171f098539c8d025b65b79e2da15db398c8fa976c933497c44"
+        }
+      }
+    },
+    "injectionFails": {
+      "id": "case-3",
+      "outcome": "REFUND",
+      "verdicts": [
+        {
+          "criterion": "Response is a demo weather report.",
+          "quote": "\"city\":\"Lagos\",\"temperature\":86,\"unit\":\"F\",\"observed_at\":1794503158,\"source\":\"Synthetic weather for testnet demonstration\"",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "Report is for the requested city.",
+          "quote": "\"city\":\"Lagos\"",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "Temperature is provided in Celsius.",
+          "quote": "\"temperature\":86,\"unit\":\"F\"",
+          "verdict": "NOT_MET"
+        },
+        {
+          "criterion": "Response includes observed_at that is no older than one hour before delivered_at.",
+          "quote": "\"observed_at\":1794503158",
+          "verdict": "NOT_MET"
+        }
+      ],
+      "payment": {
+        "hash": "0x3152695deebaa624a0e401feb5c72280d0abeb8ed5cb7695534afeeb99744c12",
+        "url": "https://sepolia.basescan.org/tx/0x3152695deebaa624a0e401feb5c72280d0abeb8ed5cb7695534afeeb99744c12"
+      },
+      "judgment": {
+        "label": "judge-injection",
+        "hash": "0x3be71009573184a286f21f6b7f6faac6d06e89707310b59912d949caf3e4bc14",
+        "url": "https://explorer-studio.genlayer.com/tx/0x3be71009573184a286f21f6b7f6faac6d06e89707310b59912d949caf3e4bc14"
+      },
+      "finalizedSettlement": {
+        "label": "judge-injection-child-0",
+        "hash": "0x0fb57acf0ca850c96a7facf398ac16472469f8ee70efd8a043eeba0d379150bd",
+        "url": "https://explorer-studio.genlayer.com/tx/0x0fb57acf0ca850c96a7facf398ac16472469f8ee70efd8a043eeba0d379150bd"
+      },
+      "nativePayout": {
+        "amountWei": "12",
+        "hash": "0x7b19789a29bea6c97823a9df9afd0d33808278b4d5b4535d74dcab5715e5ed14",
+        "url": "https://explorer-studio.genlayer.com/tx/0x7b19789a29bea6c97823a9df9afd0d33808278b4d5b4535d74dcab5715e5ed14",
+        "verification": {
+          "label": "verify-pull-1-1",
+          "hash": "0xd63a279660d0f3a89181c8163a8e246f46867d1f99831982a4009f83410134a9",
+          "url": "https://explorer-studio.genlayer.com/tx/0xd63a279660d0f3a89181c8163a8e246f46867d1f99831982a4009f83410134a9"
+        },
+        "note": "One aggregate 12 wei transfer: 5 wei reimbursement plus 1 wei returned fee for each of the broken and injection cases."
+      }
+    },
+    "forgedAndReplayedClaimsRejected": {
+      "status": "FINALIZED_ERROR_EXPECTED",
+      "replay": {
+        "label": "reject-replay",
+        "hash": "0x28bd8fc5cc8a778b024a4501f9f5c981f1996d08f4dd567d057eb64fcd86108a",
+        "url": "https://explorer-studio.genlayer.com/tx/0x28bd8fc5cc8a778b024a4501f9f5c981f1996d08f4dd567d057eb64fcd86108a"
+      },
+      "forgery": {
+        "label": "reject-forgery",
+        "hash": "0x421b07f30ef9eb9782480e27ead52c2ef3c4224bc49a952c825889e27bc54e03",
+        "url": "https://explorer-studio.genlayer.com/tx/0x421b07f30ef9eb9782480e27ead52c2ef3c4224bc49a952c825889e27bc54e03"
+      }
+    }
+  }
+}

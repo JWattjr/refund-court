@@ -1,0 +1,19 @@
+{
+  "buyer": {
+    "address": "0xcF4012Fb61Db40F392bCC85Aa563f90922910874",
+    "before": "0",
+    "after": "12"
+  },
+  "seller": {
+    "address": "0x0fBE2C500d7Fb63451CBE7BAde9348E19A6Cb91F",
+    "before": "0",
+    "after": "1"
+  },
+  "beforeAt": "2026-11-12T19:19:10.131020+00:00",
+  "court": {
+    "address": "0xE02364441641a84e8c1545C50f3E259Ff8e6b80d",
+    "before": "63",
+    "after": "50"
+  },
+  "afterAt": "2026-11-12T19:28:15.881012+00:00"
+}

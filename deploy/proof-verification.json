@@ -1,0 +1,835 @@
+{
+  "verifiedAt": "2026-11-12T20:47:43.820325+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "check": "StudioNet chain 61999",
+      "passed": true
+    },
+    {
+      "check": "ServicePromise source hash",
+      "passed": true
+    },
+    {
+      "check": "ServicePromise exact deployed source and address",
+      "passed": true
+    },
+    {
+      "check": "RefundCourt source hash",
+      "passed": true
+    },
+    {
+      "check": "RefundCourt exact deployed source and address",
+      "passed": true
+    },
+    {
+      "check": "probe-deploy matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "probe-deploy finalized",
+      "passed": true
+    },
+    {
+      "check": "probe-deploy execution success",
+      "passed": true
+    },
+    {
+      "check": "probe-base-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "probe-base-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "probe-base-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "probe-base-1 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "probe-base-1 finalized",
+      "passed": true
+    },
+    {
+      "check": "probe-base-1 execution success",
+      "passed": true
+    },
+    {
+      "check": "deploy-ServicePromise matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "deploy-ServicePromise finalized",
+      "passed": true
+    },
+    {
+      "check": "deploy-ServicePromise execution success",
+      "passed": true
+    },
+    {
+      "check": "deploy-RefundCourt matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "deploy-RefundCourt finalized",
+      "passed": true
+    },
+    {
+      "check": "deploy-RefundCourt execution success",
+      "passed": true
+    },
+    {
+      "check": "compile-subjective matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "compile-subjective finalized",
+      "passed": true
+    },
+    {
+      "check": "compile-subjective execution success",
+      "passed": true
+    },
+    {
+      "check": "compile-subjective-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "compile-subjective-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "compile-subjective-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "compile-honest matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "compile-honest finalized",
+      "passed": true
+    },
+    {
+      "check": "compile-honest execution success",
+      "passed": true
+    },
+    {
+      "check": "compile-honest-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "compile-honest-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "compile-honest-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "compile-broken matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "compile-broken finalized",
+      "passed": true
+    },
+    {
+      "check": "compile-broken execution success",
+      "passed": true
+    },
+    {
+      "check": "compile-broken-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "compile-broken-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "compile-broken-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "compile-injection matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "compile-injection finalized",
+      "passed": true
+    },
+    {
+      "check": "compile-injection execution success",
+      "passed": true
+    },
+    {
+      "check": "compile-injection-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "compile-injection-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "compile-injection-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-2 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-2 finalized",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-2 execution success",
+      "passed": true
+    },
+    {
+      "check": "bond-service-2 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "bond-service-2 finalized",
+      "passed": true
+    },
+    {
+      "check": "bond-service-2 execution success",
+      "passed": true
+    },
+    {
+      "check": "bond-service-2 native deposit credited",
+      "passed": true
+    },
+    {
+      "check": "bond-service-2-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "bond-service-2-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "bond-service-2-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-3 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-3 finalized",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-3 execution success",
+      "passed": true
+    },
+    {
+      "check": "bond-service-3 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "bond-service-3 finalized",
+      "passed": true
+    },
+    {
+      "check": "bond-service-3 execution success",
+      "passed": true
+    },
+    {
+      "check": "bond-service-3 native deposit credited",
+      "passed": true
+    },
+    {
+      "check": "bond-service-3-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "bond-service-3-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "bond-service-3-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-4 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-4 finalized",
+      "passed": true
+    },
+    {
+      "check": "prepare-service-4 execution success",
+      "passed": true
+    },
+    {
+      "check": "bond-service-4 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "bond-service-4 finalized",
+      "passed": true
+    },
+    {
+      "check": "bond-service-4 execution success",
+      "passed": true
+    },
+    {
+      "check": "bond-service-4 native deposit credited",
+      "passed": true
+    },
+    {
+      "check": "bond-service-4-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "bond-service-4-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "bond-service-4-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "fund-seller matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "fund-seller finalized",
+      "passed": true
+    },
+    {
+      "check": "fund-seller execution success",
+      "passed": true
+    },
+    {
+      "check": "fund-buyer matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "fund-buyer finalized",
+      "passed": true
+    },
+    {
+      "check": "fund-buyer execution success",
+      "passed": true
+    },
+    {
+      "check": "reserve-broken matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "reserve-broken finalized",
+      "passed": true
+    },
+    {
+      "check": "reserve-broken execution success",
+      "passed": true
+    },
+    {
+      "check": "reserve-broken-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "reserve-broken-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "reserve-broken-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "fee-broken matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "fee-broken finalized",
+      "passed": true
+    },
+    {
+      "check": "fee-broken execution success",
+      "passed": true
+    },
+    {
+      "check": "fee-broken native deposit credited",
+      "passed": true
+    },
+    {
+      "check": "fee-broken-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "fee-broken-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "fee-broken-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "judge-broken matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "judge-broken finalized",
+      "passed": true
+    },
+    {
+      "check": "judge-broken execution success",
+      "passed": true
+    },
+    {
+      "check": "judge-broken-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "judge-broken-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "judge-broken-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "reserve-honest matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "reserve-honest finalized",
+      "passed": true
+    },
+    {
+      "check": "reserve-honest execution success",
+      "passed": true
+    },
+    {
+      "check": "reserve-injection matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "reserve-injection finalized",
+      "passed": true
+    },
+    {
+      "check": "reserve-injection execution success",
+      "passed": true
+    },
+    {
+      "check": "reserve-honest-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "reserve-honest-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "reserve-honest-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "reserve-injection-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "reserve-injection-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "reserve-injection-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "fee-honest matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "fee-honest finalized",
+      "passed": true
+    },
+    {
+      "check": "fee-honest execution success",
+      "passed": true
+    },
+    {
+      "check": "fee-honest native deposit credited",
+      "passed": true
+    },
+    {
+      "check": "fee-injection matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "fee-injection finalized",
+      "passed": true
+    },
+    {
+      "check": "fee-injection execution success",
+      "passed": true
+    },
+    {
+      "check": "fee-injection native deposit credited",
+      "passed": true
+    },
+    {
+      "check": "fee-honest-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "fee-honest-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "fee-honest-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "fee-injection-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "fee-injection-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "fee-injection-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "judge-honest matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "judge-honest finalized",
+      "passed": true
+    },
+    {
+      "check": "judge-honest execution success",
+      "passed": true
+    },
+    {
+      "check": "judge-injection matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "judge-injection finalized",
+      "passed": true
+    },
+    {
+      "check": "judge-injection execution success",
+      "passed": true
+    },
+    {
+      "check": "judge-honest-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "judge-honest-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "judge-honest-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "judge-injection-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "judge-injection-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "judge-injection-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "reject-replay matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "reject-replay finalized",
+      "passed": true
+    },
+    {
+      "check": "reject-replay expected execution rejection",
+      "passed": true
+    },
+    {
+      "check": "reject-replay deterministic rejection reason",
+      "passed": true
+    },
+    {
+      "check": "reject-forgery matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "reject-forgery finalized",
+      "passed": true
+    },
+    {
+      "check": "reject-forgery expected execution rejection",
+      "passed": true
+    },
+    {
+      "check": "reject-forgery deterministic rejection reason",
+      "passed": true
+    },
+    {
+      "check": "pull-1-1 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "pull-1-1 finalized",
+      "passed": true
+    },
+    {
+      "check": "pull-1-1 execution success",
+      "passed": true
+    },
+    {
+      "check": "pull-0-1 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "pull-0-1 finalized",
+      "passed": true
+    },
+    {
+      "check": "pull-0-1 execution success",
+      "passed": true
+    },
+    {
+      "check": "pull-1-1-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "pull-1-1-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "pull-1-1-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "pull-0-1-child-0 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "pull-0-1-child-0 finalized",
+      "passed": true
+    },
+    {
+      "check": "pull-0-1-child-0 execution success",
+      "passed": true
+    },
+    {
+      "check": "verify-pull-1-1 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "verify-pull-1-1 finalized",
+      "passed": true
+    },
+    {
+      "check": "verify-pull-1-1 execution success",
+      "passed": true
+    },
+    {
+      "check": "verify-pull-0-1 matching RPC receipt",
+      "passed": true
+    },
+    {
+      "check": "verify-pull-0-1 finalized",
+      "passed": true
+    },
+    {
+      "check": "verify-pull-0-1 execution success",
+      "passed": true
+    },
+    {
+      "check": "case 1: subjective compile rejection",
+      "passed": true
+    },
+    {
+      "check": "service service-1 frozen hash integrity",
+      "passed": true
+    },
+    {
+      "check": "service service-2 frozen hash integrity",
+      "passed": true
+    },
+    {
+      "check": "service service-3 frozen hash integrity",
+      "passed": true
+    },
+    {
+      "check": "service service-4 frozen hash integrity",
+      "passed": true
+    },
+    {
+      "check": "case 2: frozen observable criteria",
+      "passed": true
+    },
+    {
+      "check": "case 2: finalized seller bond deposits",
+      "passed": true
+    },
+    {
+      "check": "case case-1 references frozen promise hash",
+      "passed": true
+    },
+    {
+      "check": "case case-1 criterion coverage",
+      "passed": true
+    },
+    {
+      "check": "case case-1 exact frozen criteria",
+      "passed": true
+    },
+    {
+      "check": "case case-1 verbatim quotations",
+      "passed": true
+    },
+    {
+      "check": "case case-1 validator-confirmed Base payment",
+      "passed": true
+    },
+    {
+      "check": "case case-1 byte-exact paid evidence",
+      "passed": true
+    },
+    {
+      "check": "case case-1 signed digest",
+      "passed": true
+    },
+    {
+      "check": "case case-2 references frozen promise hash",
+      "passed": true
+    },
+    {
+      "check": "case case-2 criterion coverage",
+      "passed": true
+    },
+    {
+      "check": "case case-2 exact frozen criteria",
+      "passed": true
+    },
+    {
+      "check": "case case-2 verbatim quotations",
+      "passed": true
+    },
+    {
+      "check": "case case-2 validator-confirmed Base payment",
+      "passed": true
+    },
+    {
+      "check": "case case-2 byte-exact paid evidence",
+      "passed": true
+    },
+    {
+      "check": "case case-2 signed digest",
+      "passed": true
+    },
+    {
+      "check": "case case-3 references frozen promise hash",
+      "passed": true
+    },
+    {
+      "check": "case case-3 criterion coverage",
+      "passed": true
+    },
+    {
+      "check": "case case-3 exact frozen criteria",
+      "passed": true
+    },
+    {
+      "check": "case case-3 verbatim quotations",
+      "passed": true
+    },
+    {
+      "check": "case case-3 validator-confirmed Base payment",
+      "passed": true
+    },
+    {
+      "check": "case case-3 byte-exact paid evidence",
+      "passed": true
+    },
+    {
+      "check": "case case-3 signed digest",
+      "passed": true
+    },
+    {
+      "check": "case 3: NOT_MET refund judgment",
+      "passed": true
+    },
+    {
+      "check": "case 4: all MET seller fee",
+      "passed": true
+    },
+    {
+      "check": "case 5: response injection fails",
+      "passed": true
+    },
+    {
+      "check": "case 6: replay and forgery finalized code rejection",
+      "passed": true
+    },
+    {
+      "check": "each payment consumed once",
+      "passed": true
+    },
+    {
+      "check": "buyer native refund claimed and verified",
+      "passed": true
+    },
+    {
+      "check": "credited native transfer 1",
+      "passed": true
+    },
+    {
+      "check": "seller filing fee claimed and verified",
+      "passed": true
+    },
+    {
+      "check": "credited native transfer 0",
+      "passed": true
+    },
+    {
+      "check": "buyer native balance increased 12 wei (two refunds plus fees)",
+      "passed": true
+    },
+    {
+      "check": "seller native balance increased by 1 wei filing fee",
+      "passed": true
+    },
+    {
+      "check": "court native balance decreased by the exact 13 wei payout",
+      "passed": true
+    },
+    {
+      "check": "cumulative GEN deposits at most 0.1 GEN",
+      "passed": true
+    },
+    {
+      "check": "exact owner-approved 63 wei deposit schedule",
+      "passed": true
+    },
+    {
+      "check": "public app and repository recorded",
+      "passed": true
+    },
+    {
+      "check": "canonical Explorer contract and transaction links verified",
+      "passed": true
+    }
+  ],
+  "blockers": []
+}
