@@ -27,10 +27,23 @@ const results = [];
 for (const e of entries) {
   const url = explorer(e.kind, e.value),
     api = explorerApi(e.kind, e.value);
-  const r = await fetch(api, {
-    headers: { "User-Agent": "Mozilla/5.0 RefundCourt/1.0" },
-    signal: AbortSignal.timeout(30000),
-  });
+  let r: Response | undefined;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      r = await fetch(api, {
+        headers: { "User-Agent": "Mozilla/5.0 RefundCourt/1.0" },
+        signal: AbortSignal.timeout(30000),
+      });
+      if (![429, 502, 503, 504].includes(r.status) || attempt === 2) break;
+      console.log(e.name, "transient Explorer HTTP", r.status, "retrying");
+      await r.arrayBuffer();
+    } catch (error) {
+      if (attempt === 2) throw error;
+      console.log(e.name, "transient Explorer transport failure; retrying");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 2000 * (attempt + 1)));
+  }
+  if (!r) throw Error("Explorer response missing");
   const body = (await r.json()) as Record<string, unknown>;
   const item = (body.transaction ?? body.address ?? body) as Record<
     string,

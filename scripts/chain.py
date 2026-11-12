@@ -15,7 +15,16 @@ _post = provider.requests.post
 def browser_post(url, **kwargs):
     kwargs['headers'] = {**kwargs.get('headers',{}), **UA}
     kwargs.setdefault('timeout',45)
-    return _post(url, **kwargs)
+    method=kwargs.get('json',{}).get('method','')
+    safe=method.startswith(('eth_get','gen_get','sim_get')) or method in ('eth_chainId','gen_call')
+    for attempt in range(4 if safe else 1):
+        try:
+            response=_post(url, **kwargs)
+            if response.status_code not in (429,502,503,504) or not safe or attempt==3:return response
+        except provider.requests.exceptions.RequestException:
+            if not safe or attempt==3:raise
+        print('Transient read-only RPC failure; retrying',flush=True)
+        time.sleep(3*(attempt+1))
 provider.requests.post = browser_post
 
 def accounts():

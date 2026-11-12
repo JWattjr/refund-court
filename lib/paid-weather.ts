@@ -1,10 +1,10 @@
 import { createHash, randomUUID } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { withX402 } from "@x402/next";
 import { HTTPFacilitatorClient, x402ResourceServer } from "@x402/core/server";
 import {
   decodePaymentSignatureHeader,
-  decodePaymentResponseHeader,
+  encodePaymentRequiredHeader,
+  encodePaymentResponseHeader,
 } from "@x402/core/http";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { privateKeyToAccount } from "viem/accounts";
@@ -35,64 +35,79 @@ export async function paidWeather(request: NextRequest, mode: Mode) {
     }),
   ).register("eip155:84532", new ExactEvmScheme());
   const path = "/api/weather/" + mode;
-  const protectedHandler = withX402<unknown>(
-    async (req: NextRequest) => {
-      const payload = decodePaymentSignatureHeader(
-        req.headers.get("payment-signature") ?? "",
-      );
-      const authorization = (
-        payload.payload as { authorization?: { from?: string } }
-      ).authorization;
-      if (
-        !authorization?.from ||
-        !/^0x[0-9a-fA-F]{40}$/.test(authorization.from)
-      )
-        return NextResponse.json(
-          { error: "An exact EIP-3009 buyer authorization is required." },
-          { status: 400 },
-        );
-      const deliveredAt = Math.floor(Date.now() / 1000);
-      const endpoint = req.nextUrl.origin + path;
-      return NextResponse.json({
-        request: JSON.stringify({
-          buyer: authorization.from.toLowerCase(),
-          city,
-          endpoint,
-          delivered_at: deliveredAt,
-          nonce,
-        }),
-        response: weatherBody(mode, city, deliveredAt),
-      });
-    },
-    {
-      [path]: {
-        accepts: [
-          {
-            scheme: "exact",
-            price: "$0.001",
-            network: "eip155:84532",
-            payTo: seller.address,
-          },
-        ],
+  // Official core APIs implement this JSON-only API route. No wallet/paywall UI
+  // is loaded into the resource server or advertised to agent clients.
+  await server.initialize();
+  const requirements = await server.buildPaymentRequirements({
+    scheme: "exact",
+    price: "$0.001",
+    network: "eip155:84532",
+    payTo: seller.address,
+    maxTimeoutSeconds: 300,
+  });
+  const challenge = async (error = "Payment required") => {
+    const required = await server.createPaymentRequiredResponse(
+      requirements,
+      {
+        url: request.url,
         description:
           "Signed demo weather; bond-backed fixed 5 wei GEN reimbursement",
         mimeType: "application/json",
       },
-    },
-    server,
-  );
-  const settled = await protectedHandler(request);
-  if (!settled.ok) return settled;
-  const header = settled.headers.get("payment-response");
-  if (!header)
-    return NextResponse.json(
-      {
-        error:
-          "No settlement receipt. Do not retry a possibly paid request until its payment is reconciled.",
-      },
-      { status: 502 },
+      error,
     );
-  const payment = decodePaymentResponseHeader(header);
+    return NextResponse.json(
+      { error },
+      {
+        status: 402,
+        headers: {
+          "PAYMENT-REQUIRED": encodePaymentRequiredHeader(required),
+          "Cache-Control": "private, no-store",
+        },
+      },
+    );
+  };
+  const header = request.headers.get("payment-signature");
+  if (!header) return challenge();
+  if (header.length > 8000)
+    return NextResponse.json(
+      { error: "Payment header is too large" },
+      { status: 400 },
+    );
+  let payload;
+  try {
+    payload = decodePaymentSignatureHeader(header);
+  } catch {
+    return challenge("Malformed x402 payment");
+  }
+  if (payload.x402Version !== 2) return challenge("x402 version 2 is required");
+  const matched = server.findMatchingRequirements(requirements, payload);
+  if (!matched)
+    return challenge(
+      "Payment does not match this seller, token, network or price",
+    );
+  if (server.getPaymentFlow(payload, matched) !== "authorization")
+    return challenge("This endpoint requires an EIP-3009 authorization flow");
+  const authorization = (
+    payload.payload as { authorization?: { from?: string } }
+  ).authorization;
+  if (!authorization?.from || !/^0x[0-9a-fA-F]{40}$/.test(authorization.from))
+    return challenge("An exact EIP-3009 buyer authorization is required");
+  const verified = await server.verifyPayment(payload, matched);
+  if (!verified.isValid)
+    return challenge(verified.invalidReason ?? "Invalid payment");
+  const deliveredAt = Math.floor(Date.now() / 1000);
+  const content = {
+    request: JSON.stringify({
+      buyer: authorization.from.toLowerCase(),
+      city,
+      endpoint: request.nextUrl.origin + path,
+      delivered_at: deliveredAt,
+      nonce,
+    }),
+    response: weatherBody(mode, city, deliveredAt),
+  };
+  const payment = await server.settlePayment(payload, matched);
   if (
     !payment.success ||
     !/^0x[0-9a-fA-F]{64}$/.test(payment.transaction) ||
@@ -104,12 +119,14 @@ export async function paidWeather(request: NextRequest, mode: Mode) {
           "Settlement is not confirmed. Reconcile its payment hash before retrying.",
         settlement: payment,
       },
-      { status: 502, headers: settled.headers },
+      {
+        status: 502,
+        headers: {
+          "PAYMENT-RESPONSE": encodePaymentResponseHeader(payment),
+          "Cache-Control": "private, no-store",
+        },
+      },
     );
-  const content = (await settled.json()) as {
-    request: string;
-    response: string;
-  };
   const hash = payment.transaction.toLowerCase() as `0x${string}`;
   const digest = createHash("sha256")
     .update(content.request + content.response + hash)
@@ -121,8 +138,9 @@ export async function paidWeather(request: NextRequest, mode: Mode) {
     signature,
     evidence_sha256: digest,
   };
-  const headers = new Headers(settled.headers);
-  headers.delete("content-length");
+  const headers = new Headers({
+    "PAYMENT-RESPONSE": encodePaymentResponseHeader(payment),
+  });
   headers.set("Cache-Control", "private, no-store");
   return NextResponse.json(envelope, { headers });
 }
