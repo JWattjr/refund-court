@@ -21,15 +21,17 @@ import type {
   Service,
   Bond,
   TxView,
+  Credit,
   Envelope,
 } from "@/lib/domain";
-import { short } from "@/lib/domain";
+import { short, captureTime } from "@/lib/domain";
 import { explorer, basePayment } from "@/lib/explorer";
 
 type Live = {
   services: Service[];
   claimCases: CourtCase[];
   bonds: Record<string, Bond>;
+  credits: Record<string, Credit>;
   readAt: string;
 };
 type Tracked = { hash: string; label: string; view?: TxView };
@@ -212,7 +214,7 @@ export default function Court({ proof }: { proof: Proof }) {
   );
   const isPending = jobs.some((j) => !j.view?.state.startsWith("FINALIZED"));
   const capture = proof.recordedAt
-    ? new Date(proof.recordedAt).toLocaleString()
+    ? captureTime(proof.recordedAt)
     : "No cases captured yet";
   return (
     <div className="shell">
@@ -546,22 +548,22 @@ export default function Court({ proof }: { proof: Proof }) {
                           <code>verify_claim</code>. A refund verdict alone is
                           not a completed payout.
                         </p>
-                        {Object.entries(proof.credits ?? {}).map(
-                          ([owner, credit]) => (
-                            <div className="credit-line" key={owner}>
-                              <span>{short(owner)}</span>
-                              <b>{credit.available_wei} wei available</b>
-                              <Badge value={credit.pull.status ?? "NO PULL"} />
-                              {credit.pull.child_hash && (
-                                <LinkOut
-                                  href={explorer("tx", credit.pull.child_hash)}
-                                >
-                                  Native receipt
-                                </LinkOut>
-                              )}
-                            </div>
-                          ),
-                        )}
+                        {Object.entries(
+                          data?.credits ?? proof.credits ?? {},
+                        ).map(([owner, credit]) => (
+                          <div className="credit-line" key={owner}>
+                            <span>{short(owner)}</span>
+                            <b>{credit.available_wei} wei available</b>
+                            <Badge value={credit.pull.status ?? "NO PULL"} />
+                            {credit.pull.child_hash && (
+                              <LinkOut
+                                href={explorer("tx", credit.pull.child_hash)}
+                              >
+                                Native receipt
+                              </LinkOut>
+                            )}
+                          </div>
+                        ))}
                       </div>
                     )}
                   </>
@@ -966,7 +968,11 @@ export default function Court({ proof }: { proof: Proof }) {
                       )}
                       {bonds[s.id]?.status === "PREPARED" && (
                         <button
-                          disabled={busy || isPending}
+                          disabled={
+                            busy ||
+                            isPending ||
+                            Date.now() / 1000 >= (bonds[s.id].deadline ?? 0)
+                          }
                           onClick={() =>
                             void act(() =>
                               send(
@@ -981,6 +987,26 @@ export default function Court({ proof }: { proof: Proof }) {
                           Post bond · 20 wei GEN
                         </button>
                       )}
+                      {["PREPARED", "FUNDING"].includes(
+                        bonds[s.id]?.status ?? "",
+                      ) &&
+                        Date.now() / 1000 >=
+                          (bonds[s.id].deadline ?? Infinity) && (
+                          <button
+                            disabled={busy || isPending}
+                            onClick={() =>
+                              void act(() =>
+                                send(
+                                  "expire_bond_intent",
+                                  [s.id],
+                                  "Expire bond intent and return credit",
+                                ),
+                              )
+                            }
+                          >
+                            Expire bond intent & return credit
+                          </button>
+                        )}
                       {bonds[s.id]?.status === "ACTIVE" && (
                         <button
                           disabled={busy || isPending}

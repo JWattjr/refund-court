@@ -72,6 +72,26 @@ elif stage=='reject':
     if not r or r.get('txExecutionResultName')=='SUCCESS':raise RuntimeError('Replay unexpectedly succeeded')
     forged=[service['id'],'0x'+'dd'*32,a['request'],a['response']+' ',a['signature']]
     tx(p,'reject-forgery',address('RefundCourt'),'reserve_claim',forged,index=1,allow_error=True)
+elif stage=='pull-all':
+    jobs=[]
+    for index in (1,0):
+        owner=accounts()[index].address
+        credit=read(address('RefundCourt'),'get_credit',[owner]);previous=credit.get('pull',{})
+        if previous.get('status')=='PAID' and int(credit['available_wei'])==0:continue
+        attempt=previous.get('attempt',0) if previous.get('status')=='PENDING' else previous.get('attempt',0)+1
+        label='pull-'+str(index)+'-'+str(attempt)
+        jobs.append((index,owner,attempt,label))
+        tx(p,label,address('RefundCourt'),'claim',[attempt],index=index,wait=False)
+    verifications=[]
+    for index,owner,attempt,label in jobs:
+        r=tx(p,label,address('RefundCourt'),'claim',[attempt],index=index)
+        child=(r.get('triggered_transactions') or [None])[0]
+        if not child:raise RuntimeError('No native transfer emitted; reconcile saved parent hash')
+        verifications.append((label,[owner,attempt,p['transactions'][label],child]))
+    for label,args in verifications:
+        tx(p,'verify-'+label,address('RefundCourt'),'verify_claim',args,wait=False)
+    for label,args in verifications:
+        tx(p,'verify-'+label,address('RefundCourt'),'verify_claim',args)
 elif stage=='pull':
     index=int(sys.argv[2]);owner=accounts()[index].address
     credit=read(address('RefundCourt'),'get_credit',[owner])

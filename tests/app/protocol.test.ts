@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { transactionState } from "../../lib/domain";
+import { transactionState, captureTime } from "../../lib/domain";
 import { explorer, basePayment } from "../../lib/explorer";
 import { weatherBody } from "../../lib/weather-mode";
 test("finality and execution success are distinct", () => {
@@ -32,6 +32,16 @@ test("finality and execution success are distinct", () => {
   assert.equal(
     transactionState({ status: "ACCEPTED", txExecutionResultName: "SUCCESS" }),
     "ACCEPTED",
+  );
+});
+test("recorded capture time is stable across server and browser locales", () => {
+  assert.equal(
+    captureTime("2026-11-12T19:11:39.123+00:00"),
+    "2026-11-12 19:11:39 UTC",
+  );
+  assert.equal(
+    captureTime("2026-11-12T20:11:39.123+01:00"),
+    "2026-11-12 19:11:39 UTC",
   );
 });
 test("one canonical GenLayer link builder validates identifiers", () => {

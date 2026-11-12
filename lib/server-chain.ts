@@ -12,6 +12,7 @@ import {
   type Bond,
   type CourtCase,
   type TxView,
+  type Credit,
 } from "./domain";
 export const recorded = source as unknown as Proof;
 const chain = createClient({
@@ -70,7 +71,22 @@ export async function snapshot() {
   }
   for (const key of caseIds.slice(-20))
     claimCases.push(await read<CourtCase>("RefundCourt", "get_case", [key]));
-  return { services, claimCases, bonds, readAt: new Date().toISOString() };
+  const owners = [
+    ...new Set([
+      ...services.map((s) => s.seller),
+      ...claimCases.map((c) => c.buyer),
+    ]),
+  ].slice(0, 8);
+  const credits: Record<string, Credit> = {};
+  for (const owner of owners)
+    credits[owner] = await read<Credit>("RefundCourt", "get_credit", [owner]);
+  return {
+    services,
+    claimCases,
+    bonds,
+    credits,
+    readAt: new Date().toISOString(),
+  };
 }
 export async function transaction(hash: string): Promise<TxView> {
   if (!/^0x[0-9a-fA-F]{64}$/.test(hash))

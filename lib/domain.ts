@@ -121,3 +121,9 @@ export function transactionState(r: Record<string, unknown>): TxState {
 }
 export const short = (s: string) =>
   s.length > 18 ? `${s.slice(0, 8)}…${s.slice(-6)}` : s;
+export function captureTime(value: string): string {
+  return new Date(value)
+    .toISOString()
+    .replace("T", " ")
+    .replace(/\.\d{3}Z$/, " UTC");
+}
