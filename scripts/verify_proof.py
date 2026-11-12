@@ -12,6 +12,7 @@ p=load();errors=[];checks=[]
 def check(ok,label):
     checks.append({'check':label,'passed':bool(ok)})
     if not ok:errors.append(label)
+    print('PASS' if ok else 'FAIL',label,flush=True)
 
 check(p.get('chainId')==61999 and int(client().provider.make_request('eth_chainId',[])['result'],16)==61999,'StudioNet chain 61999')
 for name,c in p['contracts'].items():
@@ -93,6 +94,5 @@ links=subprocess.run(['node','node_modules/tsx/dist/cli.mjs','scripts/links.ts']
 check(links.returncode==0,'canonical Explorer contract and transaction links verified')
 report={'verifiedAt':datetime.now(timezone.utc).isoformat(),'passed':not errors,'checks':checks,'blockers':errors}
 (ROOT/'deploy/proof-verification.json').write_text(json.dumps(report,indent=2))
-for entry in checks:print('PASS' if entry['passed'] else 'FAIL',entry['check'])
 print('Verified' if not errors else 'NOT READY: '+str(len(errors))+' unmet checks')
 raise SystemExit(1 if errors else 0)
