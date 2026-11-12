@@ -1,8 +1,10 @@
 """Fail closed. Recorded verdicts, lifecycle finality and native credit are distinct."""
 import hashlib
+import base64
 import json
 import subprocess
 import sys
+import time
 from datetime import datetime,timezone
 from chain import ROOT,load,success,read,client,UA
 
@@ -14,17 +16,27 @@ def check(ok,label):
 check(p.get('chainId')==61999 and int(client().provider.make_request('eth_chainId',[])['result'],16)==61999,'StudioNet chain 61999')
 for name,c in p['contracts'].items():
     check(hashlib.sha256((ROOT/'contracts'/c['source']).read_bytes()).hexdigest()==c['sha256'],name+' source hash')
+    deployed=json.loads((ROOT/'deploy/receipts'/('deploy-'+name+'.json')).read_text())
+    deployed_code=base64.b64decode(deployed.get('data',{}).get('contract_code',''))
+    check(hashlib.sha256(deployed_code).hexdigest()==c['sha256'] and deployed.get('to_address','').lower()==c['address'].lower(),name+' exact deployed source and address')
 for label,h in p['transactions'].items():
     file=ROOT/'deploy/receipts'/(label+'.json')
     r=json.loads(file.read_text()) if file.exists() else {}
     remote=client().provider.make_request('eth_getTransactionByHash',[h])['result'] or {}
+    time.sleep(1.5)
     expected=label.startswith('reject-')
     check(r.get('hash')==h and remote.get('hash')==h,label+' matching RPC receipt')
     check(remote.get('status_name',remote.get('status'))=='FINALIZED',label+' finalized')
     check(not success(remote) if expected else success(remote),label+(' expected execution rejection' if expected else ' execution success'))
     if expected:
         text=json.dumps(remote).lower()
+        for leader in (remote.get('consensus_data') or {}).get('leader_receipt',[]):
+            if isinstance(leader.get('result'),str):
+                try:text+=' '+base64.b64decode(leader['result']).decode('utf8',errors='replace').lower()
+                except ValueError:pass
         check(('already used' if 'replay' in label else 'signature does not recover') in text,label+' deterministic rejection reason')
+    if label in p['deposits']:
+        check(remote.get('value_credited') is True and int(remote.get('value',0))==p['deposits'][label],label+' native deposit credited')
 
 registry=p.get('contracts',{}).get('ServicePromise',{}).get('address')
 court=p.get('contracts',{}).get('RefundCourt',{}).get('address')
@@ -32,6 +44,9 @@ services=[read(registry,'get_service',[k]) for k in read(registry,'get_ids',[0,5
 cases=[read(court,'get_case',[k]) for k in read(court,'get_ids',[0,50])] if court else []
 check(any(s['status']=='REJECTED' for s in services),'case 1: subjective compile rejection')
 frozen=[s for s in services if s['status']=='FROZEN']
+for s in services:
+    unhashed={**s,'hash':''}
+    check(hashlib.sha256(json.dumps(unhashed,sort_keys=True,separators=(',',':')).encode()).hexdigest()==s['hash'],'service '+s['id']+' frozen hash integrity')
 check(bool(frozen) and all(2<=len(s['criteria'])<=4 for s in frozen),'case 2: frozen observable criteria')
 check(bool(frozen) and all('bond-'+s['id'] in p['transactions'] and read(court,'get_bond',[s['id']]).get('status') in ('ACTIVE','COOLDOWN','CLOSED') for s in frozen),'case 2: finalized seller bond deposits')
 by_mode={}
@@ -41,6 +56,7 @@ for c in cases:
     check(c['promise_hash']==s.get('hash'),'case '+c['id']+' references frozen promise hash')
     if c['status'] in ('REFUND','DELIVERED'):
         check(len(c['verdicts'])==len(s.get('criteria',[])),'case '+c['id']+' criterion coverage')
+        check([v['criterion'] for v in c['verdicts']]==s.get('criteria'),'case '+c['id']+' exact frozen criteria')
         check(all(v['quote'] and v['quote'] in c['response'] for v in c['verdicts']),'case '+c['id']+' verbatim quotations')
         check(c['payment'].get('status')=='PAID','case '+c['id']+' validator-confirmed Base payment')
     artifact_file=ROOT/'deploy/payments'/(mode+'.json')

@@ -2,6 +2,8 @@
 
 **Chargebacks for agents.** An agent pays an API with x402. If the seller's signed response breaches a frozen promise, GenLayer validators judge each criterion and the buyer receives a fixed reimbursement from the seller's GEN bond.
 
+[Live app](https://refund-court.vercel.app) · [Public source](https://github.com/JWattjr/refund-court)
+
 This project targets the **Internet Court: Partner Demo Lab** mission, partner **x402**. It is a desktop application. No Portal submission is automated.
 
 ## Architecture

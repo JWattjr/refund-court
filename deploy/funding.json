@@ -1,0 +1,8 @@
+{
+  "sourceAccount": "moment-grid-studionet",
+  "sourceAddress": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+  "approvedTotalWei": 63,
+  "seller": {"address":"0x0fBE2C500d7Fb63451CBE7BAde9348E19A6Cb91F","wei":60,"transactionHash":"0x2df3087d6ed1860b53857027cc3ef40bb7752f1acff91bfd42f99d70e37031f3"},
+  "buyer": {"address":"0xcF4012Fb61Db40F392bCC85Aa563f90922910874","wei":3,"transactionHash":"0xe19384bd442664b89d084558de8287fe4b7549aa0a901a5820cad887bb79d9e8"},
+  "testUSDC": {"network":"Base Sepolia","source":"Circle faucet","amount":"20","uiResult":"Tokens sent"}
+}

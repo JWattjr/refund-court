@@ -1,4 +1,5 @@
 import type { Envelope } from "./domain";
+import { permittedPayments } from "./payment-policy";
 type Provider = {
   request(args: { method: string; params?: unknown[] }): Promise<unknown>;
 };
@@ -108,9 +109,19 @@ export async function buy(
   mode: string,
   city: string,
   nonce: string,
+  seller: string,
 ): Promise<Envelope> {
   const { p, account } = await walletAccount();
   await switchChain(p, 84532);
+  const [{ createWalletClient, custom }, { baseSepolia }] = await Promise.all([
+    import("viem"),
+    import("viem/chains"),
+  ]);
+  const wallet = createWalletClient({
+    account,
+    chain: baseSepolia,
+    transport: custom(p),
+  });
   const [{ x402Client }, { wrapFetchWithPayment }, { ExactEvmScheme }] =
     await Promise.all([
       import("@x402/core/client"),
@@ -118,20 +129,22 @@ export async function buy(
       import("@x402/evm/exact/client"),
     ]);
   const client = new x402Client();
+  client.registerPolicy((version, requirements) =>
+    permittedPayments(version, requirements, seller),
+  );
   client.register(
     "eip155:84532",
     new ExactEvmScheme({
       address: account,
-      signTypedData: async (data) =>
-        p.request({
-          method: "eth_signTypedData_v4",
-          params: [account, JSON.stringify(data)],
-        }) as Promise<`0x${string}`>,
+      signTypedData: async (data) => wallet.signTypedData(data as never),
     }),
   );
   const paidFetch = wrapFetchWithPayment(fetch, client);
   const response = await paidFetch(
-    `/api/weather/${mode}?city=${encodeURIComponent(city)}&nonce=${encodeURIComponent(nonce)}`,
+    new URL(
+      `/api/weather/${mode}?city=${encodeURIComponent(city)}&nonce=${encodeURIComponent(nonce)}`,
+      window.location.origin,
+    ),
   );
   const body = await response.json();
   if (!response.ok)

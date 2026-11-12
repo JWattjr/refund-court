@@ -42,6 +42,28 @@ elif stage=='file':
     p.setdefault('caseIds',{})[mode]=cid;save(p)
     tx(p,'fee-'+mode,address('RefundCourt'),'deposit_fee',[cid],index=1,value=1)
     tx(p,'judge-'+mode,address('RefundCourt'),'judge_claim',[cid],index=1)
+elif stage=='file-remaining':
+    modes=['honest','injection']
+    jobs=[]
+    for mode in modes:
+        artifact=json.loads((ROOT/'deploy/payments'/(mode+'.json')).read_text())
+        service=next(s for s in p['services'] if s['endpoint'].endswith('/'+mode) and s['status']=='FROZEN')
+        args=[service['id'],artifact['payment_hash'],artifact['request'],artifact['response'],artifact['signature']]
+        jobs.append((mode,artifact,args))
+        tx(p,'reserve-'+mode,address('RefundCourt'),'reserve_claim',args,index=1,wait=False)
+    for mode,artifact,args in jobs:
+        tx(p,'reserve-'+mode,address('RefundCourt'),'reserve_claim',args,index=1)
+        ids=read(address('RefundCourt'),'get_ids',[0,50])
+        cid=next(k for k in ids if read(address('RefundCourt'),'get_case',[k])['payment_hash']==artifact['payment_hash'])
+        p.setdefault('caseIds',{})[mode]=cid;save(p)
+    for mode in modes:
+        tx(p,'fee-'+mode,address('RefundCourt'),'deposit_fee',[p['caseIds'][mode]],index=1,value=1,wait=False)
+    for mode in modes:
+        tx(p,'fee-'+mode,address('RefundCourt'),'deposit_fee',[p['caseIds'][mode]],index=1,value=1)
+    for mode in modes:
+        tx(p,'judge-'+mode,address('RefundCourt'),'judge_claim',[p['caseIds'][mode]],index=1,wait=False)
+    for mode in modes:
+        tx(p,'judge-'+mode,address('RefundCourt'),'judge_claim',[p['caseIds'][mode]],index=1)
 elif stage=='reject':
     a=json.loads((ROOT/'deploy/payments/broken.json').read_text())
     service=next(s for s in p['services'] if s['endpoint'].endswith('/broken') and s['status']=='FROZEN')
@@ -53,7 +75,10 @@ elif stage=='reject':
 elif stage=='pull':
     index=int(sys.argv[2]);owner=accounts()[index].address
     credit=read(address('RefundCourt'),'get_credit',[owner])
-    attempt=credit.get('pull',{}).get('attempt',0)+1
+    previous=credit.get('pull',{})
+    if previous.get('status')=='PAID' and int(credit['available_wei'])==0:
+        print('Native credit already claimed and verified',owner);raise SystemExit(0)
+    attempt=previous.get('attempt',0) if previous.get('status')=='PENDING' else previous.get('attempt',0)+1
     label='pull-'+str(index)+'-'+str(attempt)
     r=tx(p,label,address('RefundCourt'),'claim',[attempt],index=index)
     child=(r.get('triggered_transactions') or [None])[0]

@@ -20,10 +20,40 @@
     "probe-base-1": "0xf0691b98fe971e2e5ac7055b36cb3b2b350e9ac91b13223f3ded5a0fbaa2463e",
     "deploy-ServicePromise": "0xb83e1d87ef4291e0f50fc29c8892604a72b54a77b27bd1eedcaa5420a78dae11",
     "deploy-RefundCourt": "0xd39d1a5ad4f6697218b40fb80a3c3b741f16e9187281c3aefa4711877c07fb18",
-    "compile-subjective": "0x1e4dfae43e90c7aa12099b958a35d0ba4e5db9b7089d98fd1333b37e655f4991"
+    "compile-subjective": "0x1e4dfae43e90c7aa12099b958a35d0ba4e5db9b7089d98fd1333b37e655f4991",
+    "compile-subjective-child-0": "0xffdaeb529f33644c2d64d215b849292cb90bd7ec138d1a81ff8d3bf9a0105e02",
+    "compile-honest": "0xcdbc4ead416becf6449d7f03b6612795f51a87fd924040eec2190e084c95daf3",
+    "compile-honest-child-0": "0x0be4e1619cd128deb02ce599381c0fc343a3a4b9d00c88748c1004181ff00469",
+    "compile-broken": "0xb5373ab368e8b1a9544136a82cee1ff7b7fbd451f7fb24999ab726d6cc0a1d24",
+    "compile-broken-child-0": "0x242627c5fd6d927f72cb38bcfc7c24f371783408d2c6923603d63960fd958f27",
+    "compile-injection": "0x0bf2f999214e6a6c169663ab9d9df48984cdb17c8c535e6294a900f44db5d380",
+    "compile-injection-child-0": "0x3ad005b410abe6b98901c99304f8c5019075d562724b8a58f7a5ac3e00263e42",
+    "prepare-service-2": "0x535e2b0416a24f4be93bf005ba030504bb66b2033e5aee4ca159871d7f4abbf7",
+    "bond-service-2": "0x63f7b1c0320a271056746699a74c11dd313bf434c2c41592aa0223befd4073b3",
+    "bond-service-2-child-0": "0xf205244a2aaf76bb0ddd164d0953f2e95c43c243bb947c8570e15776ea6ed39c",
+    "prepare-service-3": "0xba347658dbaa46dfd96474b4bae5eab698cbfc4c449b0641aca2dc50fcdef223",
+    "bond-service-3": "0x3f4ef6324c729fcb209831432db427b4f318238e8fba1bfb075d94f5b6567cf5",
+    "bond-service-3-child-0": "0x06352bf9731d8fa4f3957c4187fd8c1b4303f967e7fa8f7fe4bfe0ca1100996c",
+    "prepare-service-4": "0x96323ed1dda30e2664c24ec45bf4bdce49262a40d338550528687710fca6273c",
+    "bond-service-4": "0x9d677094d0ecb84ba260bd04d67b8a92aefad9d8982768f68b141aefb33f57c0",
+    "bond-service-4-child-0": "0x49581861dab00e7fdda765bc27881e1ff094ebfb34508aca02c1982b8a329613",
+    "fund-seller": "0x2df3087d6ed1860b53857027cc3ef40bb7752f1acff91bfd42f99d70e37031f3",
+    "fund-buyer": "0xe19384bd442664b89d084558de8287fe4b7549aa0a901a5820cad887bb79d9e8",
+    "reserve-broken": "0x088515db3291c8f6c3ae4aa54a9660f9e2a432a1c6cedd67d51b8e122501e1fa",
+    "reserve-broken-child-0": "0x204c9cd55833f1a15412752e8f66b2b15be5336732f11ab99d8393f75bf5f8bd",
+    "fee-broken": "0x6b78a590c6b6d3ba5ea4f60889fd9b542473b50dfc817e4b0613b659d775dd41",
+    "fee-broken-child-0": "0xf0d3798bd6c60fbca93cbd2d216f8d73e9187649c8bf2a61e0a31d45b0aec527",
+    "judge-broken": "0xe29d8edad05ac3b63670c3ed741444618f9ad4c9f5354c7ce29a27db1607fac3",
+    "judge-broken-child-0": "0x6de0fe35cd7da489aa47be2005e87f7eab8daede02097be8c1c02564c8df9743",
+    "reserve-honest": "0x30fa642f8ceb8beba442c7ad5d712f95f05f5aa29f49cfe8d054cb5eaf1dab95"
   },
   "cases": {},
-  "deposits": {},
+  "deposits": {
+    "bond-service-2": 20,
+    "bond-service-3": 20,
+    "bond-service-4": 20,
+    "fee-broken": 1
+  },
   "demoWallets": [
     "0x0fBE2C500d7Fb63451CBE7BAde9348E19A6Cb91F",
     "0xcF4012Fb61Db40F392bCC85Aa563f90922910874"
@@ -42,19 +72,256 @@
       "status": 200
     }
   },
-  "services": [],
-  "bonds": {},
-  "claimCases": [],
+  "services": [
+    {
+      "compile_outcome": "REJECTED",
+      "criteria": [],
+      "endpoint": "https://refund-court.vercel.app/api/weather/honest",
+      "hash": "db926290c1e6e36c0c5d87c453d59f154910b40ceba73af512ef31b5701ce2b8",
+      "id": "service-1",
+      "network": "eip155:84532",
+      "price_units": "1000",
+      "promise": "Returns the most beautiful and delightful weather report in the world.",
+      "reason": "The promise relies on subjective quality claims (\"most beautiful\" and \"delightful\") and contains no objectively observable, independently checkable commitments.",
+      "refund_wei": "5",
+      "seller": "0x0fbe2c500d7fb63451cbe7bade9348e19a6cb91f",
+      "status": "REJECTED",
+      "token": "0x036cbd53842c5426634e7929541ec2318f3dcf7e"
+    },
+    {
+      "compile_outcome": "FROZEN",
+      "criteria": [
+        "The response is explicitly labeled or identified as a demo or synthetic weather report.",
+        "The response contains a temperature value expressed in Celsius.",
+        "The response includes an observed_at timestamp that is no more than 3600 seconds before the server-signed delivered_at timestamp.",
+        "The response contains a weather report for the city specified in the signed request."
+      ],
+      "endpoint": "https://refund-court.vercel.app/api/weather/honest",
+      "hash": "a9c6f6828db960ab108c39a79698767c5f25fd9673758330f505de47b372cf17",
+      "id": "service-2",
+      "network": "eip155:84532",
+      "price_units": "1000",
+      "promise": "Returns a demo weather report for the requested city, temperature in Celsius, with observed_at no older than one hour before delivered_at.",
+      "reason": "All four criteria are objectively verifiable from the signed request and response fields alone: the demo label is present or absent, the Celsius unit is present or absent, the arithmetic difference between observed_at and delivered_at is computable, and the city string can be compared. No subjective quality, honesty, or future obligation is asserted. The promise explicitly permits demo/synthetic data, so that criterion is valid per policy.",
+      "refund_wei": "5",
+      "seller": "0x0fbe2c500d7fb63451cbe7bade9348e19a6cb91f",
+      "status": "FROZEN",
+      "token": "0x036cbd53842c5426634e7929541ec2318f3dcf7e"
+    },
+    {
+      "compile_outcome": "FROZEN",
+      "criteria": [
+        "Response states it is a demo weather report.",
+        "Response identifies the requested city.",
+        "Response provides temperature in Celsius.",
+        "The signed JSON includes observed_at, and observed_at is no more than 3600 seconds before delivered_at."
+      ],
+      "endpoint": "https://refund-court.vercel.app/api/weather/broken",
+      "hash": "407cd07850abeab3d75e2d51f09ba463abb2422ef93de871e84ad8c2590d3d26",
+      "id": "service-3",
+      "network": "eip155:84532",
+      "price_units": "1000",
+      "promise": "Returns a demo weather report for the requested city, temperature in Celsius, with observed_at no older than one hour before delivered_at.",
+      "reason": "The promise is objectively checkable from the request and signed response, includes the requested city and Celsius because they are explicitly promised, and freshness is defined using observed_at relative to delivered_at.",
+      "refund_wei": "5",
+      "seller": "0x0fbe2c500d7fb63451cbe7bade9348e19a6cb91f",
+      "status": "FROZEN",
+      "token": "0x036cbd53842c5426634e7929541ec2318f3dcf7e"
+    },
+    {
+      "compile_outcome": "FROZEN",
+      "criteria": [
+        "Response is a demo weather report.",
+        "Report is for the requested city.",
+        "Temperature is provided in Celsius.",
+        "Response includes observed_at that is no older than one hour before delivered_at."
+      ],
+      "endpoint": "https://refund-court.vercel.app/api/weather/injection",
+      "hash": "881157a93c8ee8d6aaa8990212cc8ac6233b47d3147c5de54cb942cc130ad394",
+      "id": "service-4",
+      "network": "eip155:84532",
+      "price_units": "1000",
+      "promise": "Returns a demo weather report for the requested city, temperature in Celsius, with observed_at no older than one hour before delivered_at.",
+      "reason": "The promise is composed of objectively checkable response/request properties and a freshness condition defined against delivered_at.",
+      "refund_wei": "5",
+      "seller": "0x0fbe2c500d7fb63451cbe7bade9348e19a6cb91f",
+      "status": "FROZEN",
+      "token": "0x036cbd53842c5426634e7929541ec2318f3dcf7e"
+    }
+  ],
+  "bonds": {
+    "service-1": {},
+    "service-2": {
+      "service": {
+        "compile_outcome": "FROZEN",
+        "criteria": [
+          "The response is explicitly labeled or identified as a demo or synthetic weather report.",
+          "The response contains a temperature value expressed in Celsius.",
+          "The response includes an observed_at timestamp that is no more than 3600 seconds before the server-signed delivered_at timestamp.",
+          "The response contains a weather report for the city specified in the signed request."
+        ],
+        "endpoint": "https://refund-court.vercel.app/api/weather/honest",
+        "hash": "a9c6f6828db960ab108c39a79698767c5f25fd9673758330f505de47b372cf17",
+        "id": "service-2",
+        "network": "eip155:84532",
+        "price_units": "1000",
+        "promise": "Returns a demo weather report for the requested city, temperature in Celsius, with observed_at no older than one hour before delivered_at.",
+        "reason": "All four criteria are objectively verifiable from the signed request and response fields alone: the demo label is present or absent, the Celsius unit is present or absent, the arithmetic difference between observed_at and delivered_at is computable, and the city string can be compared. No subjective quality, honesty, or future obligation is asserted. The promise explicitly permits demo/synthetic data, so that criterion is valid per policy.",
+        "refund_wei": "5",
+        "seller": "0x0fbe2c500d7fb63451cbe7bade9348e19a6cb91f",
+        "status": "FROZEN",
+        "token": "0x036cbd53842c5426634e7929541ec2318f3dcf7e"
+      },
+      "balance": "20",
+      "locked": "0",
+      "open": 0,
+      "status": "ACTIVE",
+      "deadline": 1794513317,
+      "withdraw_after": 0
+    },
+    "service-3": {
+      "service": {
+        "compile_outcome": "FROZEN",
+        "criteria": [
+          "Response states it is a demo weather report.",
+          "Response identifies the requested city.",
+          "Response provides temperature in Celsius.",
+          "The signed JSON includes observed_at, and observed_at is no more than 3600 seconds before delivered_at."
+        ],
+        "endpoint": "https://refund-court.vercel.app/api/weather/broken",
+        "hash": "407cd07850abeab3d75e2d51f09ba463abb2422ef93de871e84ad8c2590d3d26",
+        "id": "service-3",
+        "network": "eip155:84532",
+        "price_units": "1000",
+        "promise": "Returns a demo weather report for the requested city, temperature in Celsius, with observed_at no older than one hour before delivered_at.",
+        "reason": "The promise is objectively checkable from the request and signed response, includes the requested city and Celsius because they are explicitly promised, and freshness is defined using observed_at relative to delivered_at.",
+        "refund_wei": "5",
+        "seller": "0x0fbe2c500d7fb63451cbe7bade9348e19a6cb91f",
+        "status": "FROZEN",
+        "token": "0x036cbd53842c5426634e7929541ec2318f3dcf7e"
+      },
+      "balance": "15",
+      "locked": "0",
+      "open": 0,
+      "status": "ACTIVE",
+      "deadline": 1794513454,
+      "withdraw_after": 0
+    },
+    "service-4": {
+      "service": {
+        "compile_outcome": "FROZEN",
+        "criteria": [
+          "Response is a demo weather report.",
+          "Report is for the requested city.",
+          "Temperature is provided in Celsius.",
+          "Response includes observed_at that is no older than one hour before delivered_at."
+        ],
+        "endpoint": "https://refund-court.vercel.app/api/weather/injection",
+        "hash": "881157a93c8ee8d6aaa8990212cc8ac6233b47d3147c5de54cb942cc130ad394",
+        "id": "service-4",
+        "network": "eip155:84532",
+        "price_units": "1000",
+        "promise": "Returns a demo weather report for the requested city, temperature in Celsius, with observed_at no older than one hour before delivered_at.",
+        "reason": "The promise is composed of objectively checkable response/request properties and a freshness condition defined against delivered_at.",
+        "refund_wei": "5",
+        "seller": "0x0fbe2c500d7fb63451cbe7bade9348e19a6cb91f",
+        "status": "FROZEN",
+        "token": "0x036cbd53842c5426634e7929541ec2318f3dcf7e"
+      },
+      "balance": "20",
+      "locked": "0",
+      "open": 0,
+      "status": "ACTIVE",
+      "deadline": 1794513591,
+      "withdraw_after": 0
+    }
+  },
+  "claimCases": [
+    {
+      "id": "case-1",
+      "service_id": "service-3",
+      "promise_hash": "407cd07850abeab3d75e2d51f09ba463abb2422ef93de871e84ad8c2590d3d26",
+      "buyer": "0xcf4012fb61db40f392bcc85aa563f90922910874",
+      "payment_hash": "0x8808787a7b24adf5ebd032ebd43b94770a4a96752e4c0d0921b70f0637362722",
+      "request": "{\"buyer\":\"0xcf4012fb61db40f392bcc85aa563f90922910874\",\"city\":\"Lagos\",\"endpoint\":\"https://refund-court.vercel.app/api/weather/broken\",\"delivered_at\":1794510305,\"nonce\":\"34cb6b03-6974-4562-ac93-4d6c8fdc4553\"}",
+      "response": "{\"city\":\"Lagos\",\"temperature\":86,\"unit\":\"F\",\"observed_at\":1794503105,\"source\":\"Synthetic weather for testnet demonstration\"}",
+      "signature": "0x21100af2eed49c6d4a023868927307b6827d620098073328aeaca9646351636527ba8a00e99475c00208d26f2f2a349e5bd65f6f1e7c058fa30cc05e8fcaa7041b",
+      "evidence_sha256": "f1ea4aea72c8540e999547123d0baa8d983e841099ad96cce601af5f7f474d1f",
+      "status": "REFUND",
+      "created_at": 1794510337,
+      "deadline": 1794514108,
+      "verdicts": [
+        {
+          "criterion": "Response states it is a demo weather report.",
+          "quote": "Synthetic weather for testnet demonstration",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "Response identifies the requested city.",
+          "quote": "\"city\":\"Lagos\"",
+          "verdict": "MET"
+        },
+        {
+          "criterion": "Response provides temperature in Celsius.",
+          "quote": "\"temperature\":86,\"unit\":\"F\"",
+          "verdict": "NOT_MET"
+        },
+        {
+          "criterion": "The signed JSON includes observed_at, and observed_at is no more than 3600 seconds before delivered_at.",
+          "quote": "\"observed_at\":1794503105",
+          "verdict": "NOT_MET"
+        }
+      ],
+      "payment": {
+        "block_hash": "0x2fc90759762645482d22e53c97af18971bd3156d2faf460a85e759c5c87f3923",
+        "reason": "Canonical successful USDC transfer checked",
+        "status": "PAID",
+        "transaction": "0x8808787a7b24adf5ebd032ebd43b94770a4a96752e4c0d0921b70f0637362722"
+      },
+      "refund_wei": "5",
+      "fee_wei": "1",
+      "funded": true,
+      "reason": "Canonical successful USDC transfer checked",
+      "outcome": "REFUND",
+      "closed_at": 1794510589
+    }
+  ],
   "credits": {
     "0x0fBE2C500d7Fb63451CBE7BAde9348E19A6Cb91F": {
       "available_wei": "0",
       "pull": {}
     },
     "0xcF4012Fb61Db40F392bCC85Aa563f90922910874": {
-      "available_wei": "0",
+      "available_wei": "6",
       "pull": {}
     }
   },
-  "recordedAt": "2026-11-12T18:29:32.991319+00:00",
-  "website": "https://refund-court.vercel.app"
+  "recordedAt": "2026-11-12T19:11:39.688299+00:00",
+  "website": "https://refund-court.vercel.app",
+  "github": "https://github.com/JWattjr/refund-court",
+  "approvedDepositBudgetWei": 63,
+  "funding": {
+    "sourceAccount": "moment-grid-studionet",
+    "sourceAddress": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+    "approvedTotalWei": 63,
+    "seller": {
+      "address": "0x0fBE2C500d7Fb63451CBE7BAde9348E19A6Cb91F",
+      "wei": 60,
+      "transactionHash": "0x2df3087d6ed1860b53857027cc3ef40bb7752f1acff91bfd42f99d70e37031f3"
+    },
+    "buyer": {
+      "address": "0xcF4012Fb61Db40F392bCC85Aa563f90922910874",
+      "wei": 3,
+      "transactionHash": "0xe19384bd442664b89d084558de8287fe4b7549aa0a901a5820cad887bb79d9e8"
+    },
+    "testUSDC": {
+      "network": "Base Sepolia",
+      "source": "Circle faucet",
+      "amount": "20",
+      "uiResult": "Tokens sent"
+    }
+  },
+  "caseIds": {
+    "broken": "case-1"
+  }
 }

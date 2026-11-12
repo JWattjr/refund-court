@@ -5,6 +5,15 @@ import { explorer, basePayment } from "../../lib/explorer";
 import { weatherBody } from "../../lib/weather-mode";
 test("finality and execution success are distinct", () => {
   assert.equal(
+    transactionState({
+      status: "FINALIZED",
+      type: 2,
+      value_credited: true,
+      consensus_data: { leader_receipt: [{ execution_result: "ERROR" }] },
+    }),
+    "FINALIZED_ERROR",
+  );
+  assert.equal(
     transactionState({ status: "FINALIZED", txExecutionResultName: "ERROR" }),
     "FINALIZED_ERROR",
   );

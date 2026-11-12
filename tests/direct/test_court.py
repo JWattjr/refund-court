@@ -127,3 +127,68 @@ def test_bond_cooldown(env):
     warp(vm,T+86401);c.finish_withdrawal('service-1')
     assert c.get_credit(SELLER.address)['available_wei']=='20'
     assert json.loads(c.get_bond('service-1'))['status']=='CLOSED'
+
+def pending_pull(env):
+    vm,c,*_=env
+    vm.value=7;c.deposit_bond('missing');vm.value=0
+    vm.deal(vm._contract_address,7);c.claim(1)
+    return vm,c
+
+def pull_receipts(vm,monkeypatch,paid=True,alter=None):
+    import genlayer.gl as gl
+    from types import SimpleNamespace
+    parent_hash='0x'+'ab'*32;child_hash='0x'+'cd'*32
+    owner=SELLER.address.lower();contract=to_hex(vm._contract_address).lower()
+    parent={'status':'FINALIZED','from_address':owner,'to_address':contract,'triggered_transactions':[child_hash],'data':{'calldata':{'method':'claim','args':[1]}}}
+    child={'status':'FINALIZED','triggered_by':parent_hash,'from_address':contract,'to_address':owner,'value':7,'value_credited':paid}
+    if alter:alter(parent,child)
+    def post(url,**kw):
+        h=json.loads(kw['body'])['params'][0]
+        return SimpleNamespace(status=200,body=json.dumps({'result':parent if h==parent_hash else child}).encode())
+    monkeypatch.setattr(gl.nondet.web,'post',post)
+    return parent_hash,child_hash
+
+@pytest.mark.parametrize('paid',[True,False])
+def test_reserved_native_pull_reconciliation_and_failure_retry(env,monkeypatch,paid):
+    vm,c=pending_pull(env)
+    with vm.expect_revert('transfer pending'):c.claim(2)
+    parent,child=pull_receipts(vm,monkeypatch,paid)
+    c.verify_claim(SELLER.address,1,parent,child)
+    credit=c.get_credit(SELLER.address)
+    assert credit['pull']['status']==('PAID' if paid else 'FAILED')
+    assert credit['available_wei']==('0' if paid else '7')
+    with vm.expect_revert('matching pending'):c.verify_claim(SELLER.address,1,parent,child)
+    if not paid:
+        c.claim(2)
+        assert c.get_credit(SELLER.address)['pull']['attempt']==2
+
+@pytest.mark.parametrize('field',['value','parent','origin','attempt','finality'])
+def test_unrelated_native_receipts_cannot_release_reserved_credit(env,monkeypatch,field):
+    vm,c=pending_pull(env)
+    def alter(parent,child):
+        if field=='value':child['value']=8
+        elif field=='parent':child['triggered_by']='0x'+'ef'*32
+        elif field=='origin':parent['from_address']=BUYER.address.lower()
+        elif field=='attempt':parent['data']['calldata']['args']=[2]
+        else:child['status']='ACCEPTED'
+    parent,child=pull_receipts(vm,monkeypatch,alter=alter)
+    with vm.expect_revert():c.verify_claim(SELLER.address,1,parent,child)
+    assert c.get_credit(SELLER.address)['available_wei']=='0'
+    assert c.get_credit(SELLER.address)['pull']['status']=='PENDING'
+
+def test_unreachable_base_rpc_voids_and_returns_fee(env,monkeypatch):
+    vm,c,*_=reserved(env)
+    import genlayer.gl as gl
+    def fail(*args,**kw):raise RuntimeError('RPC unavailable')
+    monkeypatch.setattr(gl.nondet.web,'post',fail)
+    c.judge_claim('case-1');selfcall(vm,c.settle_case,'case-1')
+    case=json.loads(c.get_case('case-1'))
+    assert case['status']=='VOID' and case['verdicts']==[] and case['payment']['status']=='UNAVAILABLE'
+    assert c.get_credit(BUYER.address)['available_wei']=='1'
+    assert json.loads(c.get_bond('service-1'))['locked']=='0'
+
+def test_claim_reservations_cannot_overcommit_bond(env):
+    vm,c,*_=funded(env)
+    for i in range(4):c.reserve_claim('service-1',*evidence('0x'+str(i+1)*64))
+    with vm.expect_revert('insufficient unreserved'):c.reserve_claim('service-1',*evidence('0x'+'55'*32))
+    assert json.loads(c.get_bond('service-1'))['locked']=='20'

@@ -106,7 +106,9 @@ export function transactionState(r: Record<string, unknown>): TxState {
     );
     return (execution === "SUCCESS" ||
       execution === "FINISHED_WITH_RETURN" ||
-      r.value_credited === true) &&
+      (r.value_credited === true &&
+        String(r.type) === "0" &&
+        !r.consensus_data)) &&
       !["MAJORITY_DISAGREE", "DISAGREE"].includes(String(r.result_name))
       ? "FINALIZED_SUCCESS"
       : "FINALIZED_ERROR";

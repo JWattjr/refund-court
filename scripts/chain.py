@@ -40,7 +40,9 @@ def save(proof):
 
 def success(receipt):
     leader = ((receipt.get('consensus_data') or {}).get('leader_receipt') or [{}])[0]
-    return receipt.get('status_name',receipt.get('status')) in ('FINALIZED',7,'7') and (receipt.get('txExecutionResultName',leader.get('execution_result')) in ('SUCCESS','FINISHED_WITH_RETURN') or receipt.get('value_credited') is True)
+    native=receipt.get('value_credited') is True and str(receipt.get('type'))=='0' and not receipt.get('consensus_data')
+    executed=receipt.get('txExecutionResultName',leader.get('execution_result')) in ('SUCCESS','FINISHED_WITH_RETURN') and receipt.get('result_name') not in ('DISAGREE','MAJORITY_DISAGREE')
+    return receipt.get('status_name',receipt.get('status')) in ('FINALIZED',7,'7') and (native or executed)
 
 def final(hash_value, label, allow_error=False):
     target = ROOT / 'deploy/receipts' / (label+'.json')
@@ -56,7 +58,7 @@ def final(hash_value, label, allow_error=False):
         time.sleep(10)
     raise RuntimeError('Still pending; rerun to resume '+hash_value)
 
-def tx(proof,label,address=None,method=None,args=None,code=None,index=0,value=0,allow_error=False):
+def tx(proof,label,address=None,method=None,args=None,code=None,index=0,value=0,allow_error=False,wait=True):
     if label not in proof['transactions']:
         if value:
             approval = ROOT / '.secrets/deposit-approval.json'
@@ -76,6 +78,7 @@ def tx(proof,label,address=None,method=None,args=None,code=None,index=0,value=0,
         save(proof)
         marker.unlink()
         print(label,'SUBMITTED',h,flush=True)
+    if not wait:return {'hash':proof['transactions'][label],'status':'SUBMITTED'}
     r = final(proof['transactions'][label],label,allow_error)
     for i,child in enumerate(r.get('triggered_transactions') or []):
         child_label = label+'-child-'+str(i)

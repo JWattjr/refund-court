@@ -7,12 +7,20 @@ import { x402Client } from "@x402/core/client";
 import { wrapFetchWithPayment } from "@x402/fetch";
 import { ExactEvmScheme } from "@x402/evm/exact/client";
 import type { Envelope, Proof } from "../lib/domain";
+import { permittedPayments } from "../lib/payment-policy";
 const mode = process.argv[2] ?? "broken";
 if (!["honest", "broken", "injection"].includes(mode))
   throw Error("Choose honest, broken or injection");
 const proof = JSON.parse(
   await fs.readFile("deploy/proof.json", "utf8"),
 ) as Proof;
+const approval = JSON.parse(
+  await fs.readFile(".secrets/deposit-approval.json", "utf8"),
+) as { approvedUSDCMicro?: number };
+if (approval.approvedUSDCMicro !== 3000)
+  throw Error(
+    "Owner approval required for the maximum 0.003 test USDC demo spend",
+  );
 const path = `deploy/payments/${mode}.json`;
 try {
   await fs.access(path);
@@ -52,6 +60,9 @@ await fs.writeFile(
 const xclient = new x402Client().register(
   "eip155:84532",
   new ExactEvmScheme(signer),
+);
+xclient.registerPolicy((version, requirements) =>
+  permittedPayments(version, requirements, endpoint.seller),
 );
 const paidFetch = wrapFetchWithPayment(fetch, xclient);
 const response = await paidFetch(

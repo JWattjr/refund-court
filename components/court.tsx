@@ -731,7 +731,14 @@ export default function Court({ proof }: { proof: Proof }) {
                     setNonce(n);
                     localStorage.setItem("refund-court-nonce", n);
                     const { buy } = await import("@/lib/wallet");
-                    const result = await buy(mode, city, n);
+                    if (!activeService)
+                      throw Error("Choose a frozen seller promise first.");
+                    const result = await buy(
+                      mode,
+                      city,
+                      n,
+                      activeService.seller,
+                    );
                     setEnvelope(result);
                     localStorage.setItem(
                       "refund-court-evidence",

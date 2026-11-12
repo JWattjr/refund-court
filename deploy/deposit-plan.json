@@ -1,0 +1,35 @@
+{
+  "network": "StudioNet",
+  "chainId": 61999,
+  "sourceAccount": "moment-grid-studionet",
+  "sourceAddress": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+  "seller": "0x0fBE2C500d7Fb63451CBE7BAde9348E19A6Cb91F",
+  "buyer": "0xcF4012Fb61Db40F392bCC85Aa563f90922910874",
+  "court": "0xE02364441641a84e8c1545C50f3E259Ff8e6b80d",
+  "fundingTransfersWei": {
+    "seller": 60,
+    "buyer": 3
+  },
+  "contractDepositsWei": {
+    "honestBond": 20,
+    "brokenBond": 20,
+    "injectionBond": 20,
+    "honestFilingFee": 1,
+    "brokenFilingFee": 1,
+    "injectionFilingFee": 1
+  },
+  "contractDepositTotalWei": 63,
+  "contractDepositTotalGEN": "0.000000000000000063",
+  "status": "OWNER_APPROVED",
+  "x402": {
+    "network": "Base Sepolia",
+    "chainId": 84532,
+    "faucet": "https://faucet.circle.com/",
+    "faucetAmountUSDC": "20",
+    "buyer": "0xcF4012Fb61Db40F392bCC85Aa563f90922910874",
+    "seller": "0x0fBE2C500d7Fb63451CBE7BAde9348E19A6Cb91F",
+    "maximumSpendUSDC": "0.003",
+    "requests": 3
+  },
+  "approvalDate": "2026-11-12"
+}
