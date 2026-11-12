@@ -1,0 +1,87 @@
+{
+  "network": "StudioNet",
+  "chainId": 61999,
+  "verifiedAt": "2026-11-12T18:40:42.243Z",
+  "entries": [
+    {
+      "name": "ServicePromise",
+      "kind": "address",
+      "value": "0x513f507781d8C9e2CD4DD6c5FBFcd9e660894939",
+      "url": "https://explorer-studio.genlayer.com/address/0x513f507781d8C9e2CD4DD6c5FBFcd9e660894939",
+      "api": "https://explorer-studio.genlayer.com/api/address/0x513f507781d8C9e2CD4DD6c5FBFcd9e660894939",
+      "valid": true,
+      "httpStatus": 200,
+      "type": "CONTRACT"
+    },
+    {
+      "name": "RefundCourt",
+      "kind": "address",
+      "value": "0xE02364441641a84e8c1545C50f3E259Ff8e6b80d",
+      "url": "https://explorer-studio.genlayer.com/address/0xE02364441641a84e8c1545C50f3E259Ff8e6b80d",
+      "api": "https://explorer-studio.genlayer.com/api/address/0xE02364441641a84e8c1545C50f3E259Ff8e6b80d",
+      "valid": true,
+      "httpStatus": 200,
+      "type": "CONTRACT"
+    },
+    {
+      "name": "BasePaymentProbe",
+      "kind": "address",
+      "value": "0xD419715e0a10DE844996d58a85deB0D4B8a4AE85",
+      "url": "https://explorer-studio.genlayer.com/address/0xD419715e0a10DE844996d58a85deB0D4B8a4AE85",
+      "api": "https://explorer-studio.genlayer.com/api/address/0xD419715e0a10DE844996d58a85deB0D4B8a4AE85",
+      "valid": true,
+      "httpStatus": 200,
+      "type": "CONTRACT"
+    },
+    {
+      "name": "probe-deploy",
+      "kind": "tx",
+      "value": "0x1c4c2dbf556af3a6e19b563ecc045aef8f46a788e6ecf57a875de7cfd4af86fa",
+      "url": "https://explorer-studio.genlayer.com/tx/0x1c4c2dbf556af3a6e19b563ecc045aef8f46a788e6ecf57a875de7cfd4af86fa",
+      "api": "https://explorer-studio.genlayer.com/api/transactions/0x1c4c2dbf556af3a6e19b563ecc045aef8f46a788e6ecf57a875de7cfd4af86fa",
+      "valid": true,
+      "httpStatus": 200,
+      "type": 1
+    },
+    {
+      "name": "probe-base-0",
+      "kind": "tx",
+      "value": "0x872690faa2698162b03f433b51bdda9ab90182702f2b91db4cf51ad0f8a114f1",
+      "url": "https://explorer-studio.genlayer.com/tx/0x872690faa2698162b03f433b51bdda9ab90182702f2b91db4cf51ad0f8a114f1",
+      "api": "https://explorer-studio.genlayer.com/api/transactions/0x872690faa2698162b03f433b51bdda9ab90182702f2b91db4cf51ad0f8a114f1",
+      "valid": true,
+      "httpStatus": 200,
+      "type": 2
+    },
+    {
+      "name": "probe-base-1",
+      "kind": "tx",
+      "value": "0xf0691b98fe971e2e5ac7055b36cb3b2b350e9ac91b13223f3ded5a0fbaa2463e",
+      "url": "https://explorer-studio.genlayer.com/tx/0xf0691b98fe971e2e5ac7055b36cb3b2b350e9ac91b13223f3ded5a0fbaa2463e",
+      "api": "https://explorer-studio.genlayer.com/api/transactions/0xf0691b98fe971e2e5ac7055b36cb3b2b350e9ac91b13223f3ded5a0fbaa2463e",
+      "valid": true,
+      "httpStatus": 200,
+      "type": 2
+    },
+    {
+      "name": "deploy-ServicePromise",
+      "kind": "tx",
+      "value": "0xb83e1d87ef4291e0f50fc29c8892604a72b54a77b27bd1eedcaa5420a78dae11",
+      "url": "https://explorer-studio.genlayer.com/tx/0xb83e1d87ef4291e0f50fc29c8892604a72b54a77b27bd1eedcaa5420a78dae11",
+      "api": "https://explorer-studio.genlayer.com/api/transactions/0xb83e1d87ef4291e0f50fc29c8892604a72b54a77b27bd1eedcaa5420a78dae11",
+      "valid": true,
+      "httpStatus": 200,
+      "type": 1
+    },
+    {
+      "name": "deploy-RefundCourt",
+      "kind": "tx",
+      "value": "0xd39d1a5ad4f6697218b40fb80a3c3b741f16e9187281c3aefa4711877c07fb18",
+      "url": "https://explorer-studio.genlayer.com/tx/0xd39d1a5ad4f6697218b40fb80a3c3b741f16e9187281c3aefa4711877c07fb18",
+      "api": "https://explorer-studio.genlayer.com/api/transactions/0xd39d1a5ad4f6697218b40fb80a3c3b741f16e9187281c3aefa4711877c07fb18",
+      "valid": true,
+      "httpStatus": 200,
+      "type": 1
+    }
+  ]
+}

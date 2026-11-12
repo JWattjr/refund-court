@@ -1,0 +1,9 @@
+.secrets
+.env.local
+node_modules
+.git
+tests
+artifacts
+__pycache__
+.pytest_cache
+docs/research

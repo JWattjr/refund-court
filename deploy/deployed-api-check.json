@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "paymentRequired": null,
+    "body": "HTML page"
+  },
+  {
+    "path": "/api/live",
+    "status": 200,
+    "paymentRequired": null,
+    "body": "{\"services\":[],\"claimCases\":[],\"bonds\":{},\"readAt\":\"2026-11-12T18:45:00.105Z\"}"
+  },
+  {
+    "path": "/api/transactions/0xb83e1d87ef4291e0f50fc29c8892604a72b54a77b27bd1eedcaa5420a78dae11",
+    "status": 200,
+    "paymentRequired": null,
+    "body": "{\"hash\":\"0xb83e1d87ef4291e0f50fc29c8892604a72b54a77b27bd1eedcaa5420a78dae11\",\"state\":\"FINALIZED_SUCCESS\",\"children\":[],\"appealDeadline\":null,\"error\":null}"
+  },
+  {
+    "path": "/api/weather/broken?city=Lagos&nonce=check-unpaid-123",
+    "status": 402,
+    "paymentRequired": "eyJ4NDAyVmVyc2lvbiI6MiwiZXJyb3IiOiJQYXltZW50IHJlcXVpcmVkIiwicmVzb3VyY2UiOnsidXJsIjoiaHR0cHM6Ly9yZWZ1bmQtY291cnQudmVyY2VsLmFwcC9hcGkvd2VhdGhlci9icm9rZW4/Y2l0eT1MYWdvcyZub25jZT1jaGVjay11bnBhaWQtMTIzIiwiZGVzY3JpcHRpb24iOiJTaWduZWQgZGVtbyB3ZWF0aGVyOyBib25kLWJhY2tlZCBmaXhlZCA1IHdlaSBHRU4gcmVpbWJ1cnNlbWVudCIsIm1pbWVUeXBlIjoiYXBwbGljYXRpb24vanNvbiJ9LCJhY2NlcHRzIjpbeyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJlaXAxNTU6ODQ1MzIiLCJhbW91bnQiOiIxMDAwIiwiYXNzZXQiOiIweDAzNkNiRDUzODQyYzU0MjY2MzRlNzkyOTU0MWVDMjMxOGYzZENGN2UiLCJwYXlUbyI6IjB4MGZCRTJDNTAwZDdGYjYzNDUxQ0JFN0JBZGU5MzQ4RTE5QTZDYjkxRiIsIm1heFRpbWVvdXRTZWNvbmRzIjozMDAsImV4dHJhIjp7Im5hbWUiOiJVU0RDIiwidmVyc2lvbiI6IjIifX1dfQ==",
+    "body": "{\"error\":\"Payment required\"}"
+  }
+]

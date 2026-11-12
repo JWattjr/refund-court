@@ -1,0 +1,17 @@
+node_modules/
+.next/
+.vercel/
+.env*
+!.env.example
+artifacts/
+docs/research/*.md
+!.env.example
+.secrets/
+__pycache__/
+.pytest_cache/
+*.tsbuildinfo
+.impeccable/
+test-results/
+
+.vercel
+.env*
